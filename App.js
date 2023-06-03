@@ -1,12 +1,25 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { useState } from "react";
 
 export default function App() {
+  const [enteredText, setEnteredText] = useState("");
+  function readingListHandler(enteredText) {
+    setEnteredText(enteredText);
+  }
+  function addReadingListHandler() {
+    console.info(enteredText);
+  }
+
   return (
     <View>
       <View style={styles.appContainer}>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.textInput} placeholder="Your book list" />
-          <Button title="Add a book" />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Your reading list"
+            onChangeText={readingListHandler}
+          />
+          <Button title="Add a book" onPress={addReadingListHandler} />
         </View>
         <View style={styles.booksContainer}>
           <Text>List of books...</Text>
