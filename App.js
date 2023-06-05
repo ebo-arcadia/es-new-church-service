@@ -1,13 +1,19 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { useState } from "react";
+import uuid from "react-native-uuid";
 
 export default function App() {
   const [enteredText, setEnteredText] = useState("");
+  const [readingList, setReadingList] = useState([]);
+
   function readingListHandler(enteredText) {
     setEnteredText(enteredText);
   }
   function addReadingListHandler() {
-    console.info(enteredText);
+    setReadingList((currentReadingList) => [
+      ...currentReadingList,
+      enteredText,
+    ]);
   }
 
   return (
@@ -22,7 +28,11 @@ export default function App() {
           <Button title="Add a book" onPress={addReadingListHandler} />
         </View>
         <View style={styles.booksContainer}>
-          <Text>List of books...</Text>
+          <Text>
+            {readingList.map((textItem) => (
+              <Text key={uuid.v4()}>{textItem}</Text>
+            ))}
+          </Text>
         </View>
       </View>
     </View>
