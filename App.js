@@ -28,11 +28,11 @@ export default function App() {
           <Button title="Add a book" onPress={addReadingListHandler} />
         </View>
         <View style={styles.booksContainer}>
-          <Text>
-            {readingList.map((textItem) => (
-              <Text key={uuid.v4()}>{textItem}</Text>
-            ))}
-          </Text>
+          {readingList.map((textItem) => (
+            <View key={uuid.v4()} style={styles.listItem}>
+              <Text style={styles.itemText}>{textItem}</Text>
+            </View>
+          ))}
         </View>
       </View>
     </View>
@@ -65,5 +65,14 @@ const styles = StyleSheet.create({
   flexContainer: {
     flex: 1,
     padding: 20,
+  },
+  listItem: {
+    margin: 8,
+    borderRadius: 10,
+    padding: 6,
+    backgroundColor: "purple",
+  },
+  itemText: {
+    color: "white",
   },
 });
