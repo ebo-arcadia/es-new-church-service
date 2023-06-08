@@ -20,7 +20,7 @@ export default function App() {
   function addReadingListHandler() {
     setReadingList((currentReadingList) => [
       ...currentReadingList,
-      enteredText,
+      { text: enteredText, id: uuid.v4().toString() },
     ]);
   }
 
@@ -39,10 +39,13 @@ export default function App() {
           data={readingList}
           renderItem={(itemData) => {
             return (
-              <View key={uuid.v4()} style={styles.listItem}>
-                <Text style={styles.itemText}>{itemData.item}</Text>
+              <View style={styles.listItem}>
+                <Text style={styles.itemText}>{itemData.item.text}</Text>
               </View>
             );
+          }}
+          keyExtractor={(item, index) => {
+            return item.id;
           }}
         />
       </View>
