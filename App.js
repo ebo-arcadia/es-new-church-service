@@ -5,6 +5,7 @@ import {
   Button,
   TextInput,
   ScrollView,
+  FlatList,
 } from "react-native";
 import { useState } from "react";
 import uuid from "react-native-uuid";
@@ -33,13 +34,25 @@ export default function App() {
         />
         <Button title="Add a book" onPress={addReadingListHandler} />
       </View>
-      <ScrollView style={styles.booksContainer}>
+      <View style={styles.booksContainer}>
+        <FlatList
+          data={readingList}
+          renderItem={(itemData) => {
+            return (
+              <View key={uuid.v4()} style={styles.listItem}>
+                <Text style={styles.itemText}>{itemData.item}</Text>
+              </View>
+            );
+          }}
+        />
+      </View>
+      {/* <ScrollView style={styles.booksContainer}>
         {readingList.map((textItem) => (
           <View key={uuid.v4()} style={styles.listItem}>
             <Text style={styles.itemText}>{textItem}</Text>
           </View>
         ))}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
