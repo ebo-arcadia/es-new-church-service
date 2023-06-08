@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import { useState } from "react";
 import uuid from "react-native-uuid";
 
@@ -17,24 +24,22 @@ export default function App() {
   }
 
   return (
-    <View>
-      <View style={styles.appContainer}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Your reading list"
-            onChangeText={readingListHandler}
-          />
-          <Button title="Add a book" onPress={addReadingListHandler} />
-        </View>
-        <View style={styles.booksContainer}>
-          {readingList.map((textItem) => (
-            <View key={uuid.v4()} style={styles.listItem}>
-              <Text style={styles.itemText}>{textItem}</Text>
-            </View>
-          ))}
-        </View>
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your reading list"
+          onChangeText={readingListHandler}
+        />
+        <Button title="Add a book" onPress={addReadingListHandler} />
       </View>
+      <ScrollView style={styles.booksContainer}>
+        {readingList.map((textItem) => (
+          <View key={uuid.v4()} style={styles.listItem}>
+            <Text style={styles.itemText}>{textItem}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
