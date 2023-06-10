@@ -1,14 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Button, TextInput, FlatList } from "react-native";
 import { useState } from "react";
 import uuid from "react-native-uuid";
+import ReadingListItem from "./components/ReadingListItem";
 
 export default function App() {
   const [enteredText, setEnteredText] = useState("");
@@ -38,11 +31,7 @@ export default function App() {
         <FlatList
           data={readingList}
           renderItem={(itemData) => {
-            return (
-              <View style={styles.listItem}>
-                <Text style={styles.itemText}>{itemData.item.text}</Text>
-              </View>
-            );
+            return <ReadingListItem text={itemData.item.text} />;
           }}
           keyExtractor={(item, index) => {
             return item.id;
@@ -86,14 +75,5 @@ const styles = StyleSheet.create({
   flexContainer: {
     flex: 1,
     padding: 20,
-  },
-  listItem: {
-    margin: 8,
-    borderRadius: 10,
-    padding: 6,
-    backgroundColor: "purple",
-  },
-  itemText: {
-    color: "white",
   },
 });
