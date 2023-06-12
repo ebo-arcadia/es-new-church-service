@@ -1,16 +1,13 @@
-import { StyleSheet, View, Button, TextInput, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import { useState } from "react";
 import uuid from "react-native-uuid";
 import ReadingListItem from "./components/ReadingListItem";
+import ReadingListInput from "./components/ReadingListInput";
 
 export default function App() {
-  const [enteredText, setEnteredText] = useState("");
   const [readingList, setReadingList] = useState([]);
 
-  function readingListHandler(enteredText) {
-    setEnteredText(enteredText);
-  }
-  function addReadingListHandler() {
+  function addReadingListHandler(enteredText) {
     setReadingList((currentReadingList) => [
       ...currentReadingList,
       { text: enteredText, id: uuid.v4().toString() },
@@ -19,14 +16,7 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Your reading list"
-          onChangeText={readingListHandler}
-        />
-        <Button title="Add a book" onPress={addReadingListHandler} />
-      </View>
+      <ReadingListInput onAddReadingItems={addReadingListHandler} />
       <View style={styles.booksContainer}>
         <FlatList
           data={readingList}
@@ -38,13 +28,6 @@ export default function App() {
           }}
         />
       </View>
-      {/* <ScrollView style={styles.booksContainer}>
-        {readingList.map((textItem) => (
-          <View key={uuid.v4()} style={styles.listItem}>
-            <Text style={styles.itemText}>{textItem}</Text>
-          </View>
-        ))}
-      </ScrollView> */}
     </View>
   );
 }
@@ -54,26 +37,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     paddingHorizontal: 10,
   },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 22,
-    borderBottomWidth: 2,
-    borderBottomColor: "blue",
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "green",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
-  },
   booksContainer: {
     backgroundColor: "red",
-  },
-  flexContainer: {
-    flex: 1,
-    padding: 20,
   },
 });
