@@ -14,6 +14,12 @@ export default function App() {
     ]);
   }
 
+  function deleteReadingItemHandler(id) {
+    setReadingList((currentReadingList) => {
+      return currentReadingList.filter((item) => item.id !== id);
+    });
+  }
+
   return (
     <View style={styles.appContainer}>
       <ReadingListInput onAddReadingItems={addReadingListHandler} />
@@ -21,7 +27,13 @@ export default function App() {
         <FlatList
           data={readingList}
           renderItem={(itemData) => {
-            return <ReadingListItem text={itemData.item.text} />;
+            return (
+              <ReadingListItem
+                text={itemData.item.text}
+                id={itemData.item.id}
+                onDeleteReadingItems={deleteReadingItemHandler}
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.id;

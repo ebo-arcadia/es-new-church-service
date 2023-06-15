@@ -1,10 +1,12 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 
 function ReadingListItem(props) {
   return (
-    <View style={styles.listItem}>
-      <Text style={styles.itemText}>{props.text}</Text>
-    </View>
+    <Pressable onPress={props.onDeleteReadingItems.bind(this, props.id)}>
+      <View style={styles.listItem}>
+        <Text style={styles.itemText}>{props.text}</Text>
+      </View>
+    </Pressable>
   );
 }
 
