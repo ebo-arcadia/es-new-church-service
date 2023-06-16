@@ -1,4 +1,4 @@
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
 import { useState } from "react";
 
 function ReadingListInput(props) {
@@ -14,15 +14,24 @@ function ReadingListInput(props) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Your reading list"
-        onChangeText={readingListHandler}
-        value={enteredText}
-      />
-      <Button title="Add a book" onPress={addReadingListHandler} />
-    </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your reading list"
+          onChangeText={readingListHandler}
+          value={enteredText}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add a book" onPress={addReadingListHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
@@ -30,8 +39,10 @@ export default ReadingListInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: 16,
     alignItems: "center",
     marginBottom: 22,
     borderBottomWidth: 2,
@@ -40,8 +51,15 @@ const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: "green",
-    width: "70%",
-    marginRight: 8,
+    width: "100%",
     padding: 8,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  button: {
+    marginTop: 14,
+    width: "30%",
+    marginHorizontal: 8,
   },
 });

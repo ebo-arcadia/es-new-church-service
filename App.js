@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 import { useState } from "react";
 import uuid from "react-native-uuid";
 import ReadingListItem from "./components/ReadingListItem";
@@ -6,12 +6,17 @@ import ReadingListInput from "./components/ReadingListInput";
 
 export default function App() {
   const [readingList, setReadingList] = useState([]);
+  const [modalVisible, setModelVisible] = useState(false);
 
   function addReadingListHandler(enteredText) {
     setReadingList((currentReadingList) => [
       ...currentReadingList,
       { text: enteredText, id: uuid.v4().toString() },
     ]);
+  }
+
+  function readyAddListItemHandler() {
+    setModelVisible(true);
   }
 
   function deleteReadingItemHandler(id) {
@@ -22,7 +27,17 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <ReadingListInput onAddReadingItems={addReadingListHandler} />
+      <Button
+        title="Add new reading item"
+        color="purple"
+        onPress={readyAddListItemHandler}
+      />
+
+      <ReadingListInput
+        visible={modalVisible}
+        onAddReadingItems={addReadingListHandler}
+      />
+
       <View style={styles.booksContainer}>
         <FlatList
           data={readingList}
