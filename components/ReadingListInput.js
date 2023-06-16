@@ -27,7 +27,7 @@ function ReadingListInput(props) {
             <Button title="Add a book" onPress={addReadingListHandler} />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" />
+            <Button title="Cancel" onPress={props.onCancelModal} />
           </View>
         </View>
       </View>

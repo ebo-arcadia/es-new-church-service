@@ -13,10 +13,15 @@ export default function App() {
       ...currentReadingList,
       { text: enteredText, id: uuid.v4().toString() },
     ]);
+    cancelAddListItemHandler();
   }
 
   function readyAddListItemHandler() {
     setModelVisible(true);
+  }
+
+  function cancelAddListItemHandler() {
+    setModelVisible(false);
   }
 
   function deleteReadingItemHandler(id) {
@@ -36,6 +41,7 @@ export default function App() {
       <ReadingListInput
         visible={modalVisible}
         onAddReadingItems={addReadingListHandler}
+        onCancelModal={cancelAddListItemHandler}
       />
 
       <View style={styles.booksContainer}>
