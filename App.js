@@ -3,6 +3,7 @@ import { useState } from "react";
 import uuid from "react-native-uuid";
 import ReadingListItem from "./components/ReadingListItem";
 import ReadingListInput from "./components/ReadingListInput";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [readingList, setReadingList] = useState([]);
@@ -31,37 +32,40 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add new reading item"
-        color="purple"
-        onPress={readyAddListItemHandler}
-      />
-
-      <ReadingListInput
-        visible={modalVisible}
-        onAddReadingItems={addReadingListHandler}
-        onCancelModal={cancelAddListItemHandler}
-      />
-
-      <View style={styles.booksContainer}>
-        <FlatList
-          data={readingList}
-          renderItem={(itemData) => {
-            return (
-              <ReadingListItem
-                text={itemData.item.text}
-                id={itemData.item.id}
-                onDeleteReadingItems={deleteReadingItemHandler}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add new reading item"
+          color="purple"
+          onPress={readyAddListItemHandler}
         />
+
+        <ReadingListInput
+          visible={modalVisible}
+          onAddReadingItems={addReadingListHandler}
+          onCancelModal={cancelAddListItemHandler}
+        />
+
+        <View style={styles.booksContainer}>
+          <FlatList
+            data={readingList}
+            renderItem={(itemData) => {
+              return (
+                <ReadingListItem
+                  text={itemData.item.text}
+                  id={itemData.item.id}
+                  onDeleteReadingItems={deleteReadingItemHandler}
+                />
+              );
+            }}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 

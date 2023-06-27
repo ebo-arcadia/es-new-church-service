@@ -1,4 +1,11 @@
-import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Modal,
+  Image,
+} from "react-native";
 import { useState } from "react";
 
 function ReadingListInput(props) {
@@ -16,6 +23,10 @@ function ReadingListInput(props) {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/main-logo.png")}
+        />
         <TextInput
           style={styles.textInput}
           placeholder="Your reading list"
@@ -24,10 +35,18 @@ function ReadingListInput(props) {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Add a book" onPress={addReadingListHandler} />
+            <Button
+              title="Add a book"
+              onPress={addReadingListHandler}
+              color="#b180f0"
+            />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={props.onCancelModal} />
+            <Button
+              title="Cancel"
+              onPress={props.onCancelModal}
+              color="#f31282"
+            />
           </View>
         </View>
       </View>
@@ -44,15 +63,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 16,
     alignItems: "center",
-    marginBottom: 22,
-    borderBottomWidth: 2,
-    borderBottomColor: "blue",
+    backgroundColor: "#311b6b",
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "green",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
+    color: "#120438",
+    borderRadius: 10,
     width: "100%",
-    padding: 8,
+    padding: 16,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -61,5 +81,10 @@ const styles = StyleSheet.create({
     marginTop: 14,
     width: "30%",
     marginHorizontal: 8,
+  },
+  image: {
+    width: 300,
+    height: 60,
+    margin: 10,
   },
 });
